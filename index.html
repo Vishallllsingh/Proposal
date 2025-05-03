@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Heart's Confession</title>
   <style>
     * {
@@ -75,6 +76,7 @@
       display: none;
       animation: popin 1s ease forwards;
     }
+
     @keyframes popin {
       0% { transform: scale(0); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
@@ -87,6 +89,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+
     .floating-hearts {
       position: absolute;
       top: 0;
@@ -106,12 +109,41 @@
       0% { transform: translateY(0) scale(1); opacity: 1; }
       100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      .photo-frame {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .photo-frame img {
+        width: 90%;
+        height: auto;
+      }
+      .btn {
+        width: 90%;
+        font-size: 1.1rem;
+        padding: 12px 30px;
+      }
+      .msg {
+        font-size: 1.2rem;
+        padding: 0 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <audio id="music" autoplay loop>
     <source src="romantic_background_music.mp3" type="audio/mp3">
   </audio>
+
   <div class="container">
     <h1>My Heart's Confession ❤️</h1>
     <p>From the moment I saw you, I knew you were special. Today, I gather courage to ask you something from the bottom of my heart.</p>
@@ -122,6 +154,7 @@
     <button class="btn" onclick="proposeLove()">Will you be mine?</button>
     <div class="msg" id="response">You just made me the happiest person alive! 💍</div>
   </div>
+
   <div class="floating-hearts" id="hearts"></div>
 
   <script>
@@ -142,6 +175,14 @@
         setTimeout(() => heart.remove(), 5000);
       }
     }
+
+    // Allow music to play on first user interaction (for mobile)
+    document.addEventListener('click', () => {
+      const music = document.getElementById('music');
+      if (music.paused) {
+        music.play();
+      }
+    }, { once: true });
   </script>
 </body>
 </html>
